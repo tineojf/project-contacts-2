@@ -20,5 +20,20 @@ public class App {
         int option = scanner.nextInt();
 //        System.out.println("Option: " + option);
         System.out.println("----------------------------------------");
+
+        switch (option) {
+            case 1:
+                System.out.println("Create a new contact");
+                break;
+            case 2:
+                System.out.println("List all contacts");
+                break;
+            case 3:
+                System.out.println("Exit");
+                break;
+            default:
+                System.out.println("Invalid option");
+                break;
+        }
     }
 }
