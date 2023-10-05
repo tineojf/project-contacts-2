@@ -1,5 +1,6 @@
 package tineo;
 
+import back.models.Person;
 import front.Options;
 
 import java.util.Scanner;
@@ -41,7 +42,7 @@ public class App {
                 }
 
                 // Print contact info
-                options.getPersonID(id);
+                Person choicePerson = options.getPersonID(id);
 
                 System.out.println("1) Edit");
                 System.out.println("2) Delete");
@@ -51,6 +52,7 @@ public class App {
                 switch (option2) {
                     case "1":
                         System.out.println("Edit");
+                        options.putPersonID(choicePerson);
                         break;
                     case "2":
                         System.out.println("Delete");

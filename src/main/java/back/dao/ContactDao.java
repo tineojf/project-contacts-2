@@ -146,4 +146,30 @@ public class ContactDao {
             System.out.println("Fail");
         }
     }
+
+    public void putContact(Person pm_person) {
+        Dotenv dotenv = Dotenv.configure().load();
+        String dbTable = dotenv.get("DB_TABLE");
+
+        Connection connection = this.connectDB();
+        String query = "UPDATE " + dbTable
+                + " SET name = '" + pm_person.getName()
+                + "', lastname = '" + pm_person.getLastname()
+                + "', birthday = '" + pm_person.getBirthday()
+                + "', email = '" + pm_person.getEmail()
+                + "', phone = '" + pm_person.getPhone()
+                + "', country = '" + pm_person.getCountry()
+                + "' WHERE id = '" + pm_person.getId() + "' LIMIT 1";
+
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(query);
+            statement.close();
+            connection.close();
+            System.out.println("Update success");
+        } catch (Exception e) {
+            Logger.getLogger(ContactDao.class.getName()).log(Level.SEVERE, null, e);
+            System.out.println("Fail");
+        }
+    }
 }
