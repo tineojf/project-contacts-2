@@ -1,5 +1,8 @@
 package org.tineo;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
+
 import java.util.Scanner;
 
 public class App {
@@ -20,5 +23,9 @@ public class App {
         int option = scanner.nextInt();
 //        System.out.println("Option: " + option);
         System.out.println("----------------------------------------");
+
+        Dotenv dotenv = Dotenv.configure().load();
+        String dbHost = dotenv.get("DATABASE");
+        System.out.println(dbHost);
     }
 }
