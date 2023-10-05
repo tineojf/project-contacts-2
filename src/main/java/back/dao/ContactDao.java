@@ -1,7 +1,7 @@
 package back.dao;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import back.models.Person;
+import io.github.cdimascio.dotenv.Dotenv;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -41,11 +41,14 @@ public class ContactDao {
     }
 
     public List<Person> getContacts() {
+        Dotenv dotenv = Dotenv.configure().load();
+        String dbTable = dotenv.get("DB_TABLE");
+
         Connection connection = this.connectDB();
         List<Person> persons = new ArrayList<Person>();
 
         try {
-            String query = "SELECT * FROM persons";
+            String query = "SELECT * FROM " + dbTable;
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
 
@@ -68,6 +71,28 @@ public class ContactDao {
         } catch (Exception e) {
             Logger.getLogger(ContactDao.class.getName()).log(Level.SEVERE, null, e);
             return null;
+        }
+    }
+
+    public void postContact(Person pm_person) {
+        Dotenv dotenv = Dotenv.configure().load();
+        String dbTable = dotenv.get("DB_TABLE");
+
+        Connection connection = this.connectDB();
+        String query = "INSERT INTO " + dbTable + " (name, lastname, birthday, email, phone, country) " + "VALUES ('"
+                + pm_person.getName() + "', '" + pm_person.getLastname() + "', '"
+                + pm_person.getBirthday() + "', '" + pm_person.getEmail() + "', '"
+                + pm_person.getPhone() + "', '" + pm_person.getCountry() + "')";
+
+        try {
+            Statement statement = connection.createStatement();
+            statement.execute(query);
+            statement.close();
+            connection.close();
+            System.out.println("Success");
+        } catch (Exception e) {
+            Logger.getLogger(ContactDao.class.getName()).log(Level.SEVERE, null, e);
+            System.out.println("Fail");
         }
     }
 }

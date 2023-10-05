@@ -1,10 +1,13 @@
 package tineo;
 
+import front.Options;
+
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Options options = new Options();
 
         System.out.println("----------------------------------------");
         System.out.println("Project Contacts");
@@ -24,9 +27,11 @@ public class App {
         switch (option) {
             case 1:
                 System.out.println("Create a new contact");
+                options.createPerson();
                 break;
             case 2:
                 System.out.println("List all contacts");
+                options.getPerson();
                 break;
             case 3:
                 System.out.println("Exit");
