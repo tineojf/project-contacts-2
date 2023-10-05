@@ -86,10 +86,61 @@ public class ContactDao {
 
         try {
             Statement statement = connection.createStatement();
-            statement.execute(query);
+            statement.executeUpdate(query);
             statement.close();
             connection.close();
             System.out.println("Success");
+        } catch (Exception e) {
+            Logger.getLogger(ContactDao.class.getName()).log(Level.SEVERE, null, e);
+            System.out.println("Fail");
+        }
+    }
+
+    public Person getContactID(String pm_id) {
+        Dotenv dotenv = Dotenv.configure().load();
+        String dbTable = dotenv.get("DB_TABLE");
+
+        Connection connection = this.connectDB();
+        String query = "SELECT * FROM " + dbTable + " WHERE id = '" + pm_id + "' LIMIT 1";
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            if (resultSet.next()) {
+                Person person = new Person();
+                person.setId(resultSet.getString("id"));
+                person.setName(resultSet.getString("name"));
+                person.setLastname(resultSet.getString("lastname"));
+                person.setPhone(resultSet.getString("phone"));
+                person.setEmail(resultSet.getString("email"));
+                person.setBirthday(resultSet.getString("birthday"));
+                person.setCountry(resultSet.getString("country"));
+
+                resultSet.close();
+                statement.close();
+                connection.close();
+                return person;
+            }
+        } catch (Exception e) {
+            Logger.getLogger(ContactDao.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
+    }
+
+    public void deleteContact(String pm_id) {
+        Dotenv dotenv = Dotenv.configure().load();
+        String dbTable = dotenv.get("DB_TABLE");
+
+        Connection connection = this.connectDB();
+        String query = "DELETE FROM " + dbTable + " WHERE id = '" + pm_id + "' LIMIT 1";
+
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(query);
+            statement.close();
+            connection.close();
+            System.out.println("Delete success");
         } catch (Exception e) {
             Logger.getLogger(ContactDao.class.getName()).log(Level.SEVERE, null, e);
             System.out.println("Fail");

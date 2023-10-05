@@ -35,4 +35,30 @@ public class Options {
         ContactDao contactDao = new ContactDao();
         contactDao.postContact(person);
     }
+
+    public void getPersonID(String id) {
+        ContactDao contactDao = new ContactDao();
+        Person person = contactDao.getContactID(id);
+
+        if (person != null) {
+            System.out.println("----------------------------------------");
+            System.out.println("Contact: #" + person.getId());
+            System.out.println("Name:     " + person.getName());
+            System.out.println("Lastname: " + person.getLastname());
+            System.out.println("Email:    " + person.getEmail());
+            System.out.println("Phone:    " + person.getPhone());
+            System.out.println("Country:  " + person.getCountry());
+            System.out.println("Birthday: " + person.getBirthday());
+            System.out.println("----------------------------------------");
+        } else {
+            System.out.println("----------------------------------------");
+            System.out.println("No contact found for ID: " + id);
+            System.out.println("----------------------------------------");
+        }
+    }
+
+    public void deletePersonID(String id) {
+        ContactDao contactDao = new ContactDao();
+        contactDao.deleteContact(id);
+    }
 }

@@ -40,9 +40,29 @@ public class App {
                     break;
                 }
 
-                // TODO: Print contact
-                //  Print Options (delete/update)
-                //  Print exit
+                // Print contact info
+                options.getPersonID(id);
+
+                System.out.println("1) Edit");
+                System.out.println("2) Delete");
+                System.out.println("3) Back");
+                String option2 = scanner.next();
+
+                switch (option2) {
+                    case "1":
+                        System.out.println("Edit");
+                        break;
+                    case "2":
+                        System.out.println("Delete");
+                        options.deletePersonID(id);
+                        break;
+                    case "3":
+                        System.out.println("Back");
+                        break;
+                    default:
+                        System.out.println("Invalid option");
+                        break;
+                }
                 break;
             case 3:
                 System.out.println("Exit");
