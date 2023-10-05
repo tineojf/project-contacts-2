@@ -1,7 +1,7 @@
-package org.dao;
+package back.dao;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import org.models.Person;
+import back.models.Person;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

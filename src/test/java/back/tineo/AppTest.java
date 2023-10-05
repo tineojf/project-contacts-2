@@ -1,4 +1,4 @@
-package org.tineo;
+package back.tineo;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

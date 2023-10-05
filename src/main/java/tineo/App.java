@@ -1,4 +1,4 @@
-package org.tineo;
+package tineo;
 
 import java.util.Scanner;
 

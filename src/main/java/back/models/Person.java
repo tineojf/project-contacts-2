@@ -1,4 +1,4 @@
-package org.models;
+package back.models;
 
 public class Person {
     private String id;
