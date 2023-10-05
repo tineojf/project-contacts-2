@@ -32,6 +32,17 @@ public class App {
             case 2:
                 System.out.println("List all contacts");
                 options.getPerson();
+
+                System.out.println("Type the item id to view a contact (0 to back): ");
+                String id = scanner.next();
+
+                if (id.equals("0")) {
+                    break;
+                }
+
+                // TODO: Print contact
+                //  Print Options (delete/update)
+                //  Print exit
                 break;
             case 3:
                 System.out.println("Exit");
